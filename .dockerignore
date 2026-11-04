@@ -1,0 +1,15 @@
+.git
+.github
+.npm-cache
+node_modules
+dist
+coverage
+test
+examples
+docs
+workspace
+.env
+.env.*
+!.env.example
+npm-debug.log*
+agent-harness-*.tgz

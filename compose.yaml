@@ -1,0 +1,32 @@
+services:
+  agent-harness:
+    build: .
+    image: agent-harness:local
+    init: true
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./workspace:/workspace
+    environment:
+      AGENT_PROVIDER: ${AGENT_PROVIDER:-openai}
+      AGENT_MODEL: ${AGENT_MODEL:?Set AGENT_MODEL in your environment}
+      AGENT_PROMPT: ${AGENT_PROMPT:?Set AGENT_PROMPT in your environment}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-}
+    command:
+      - --provider
+      - ${AGENT_PROVIDER:-openai}
+      - --model
+      - ${AGENT_MODEL:?Set AGENT_MODEL in your environment}
+      - --prompt
+      - ${AGENT_PROMPT:?Set AGENT_PROMPT in your environment}
+      - --workspace
+      - /workspace

@@ -1,0 +1,30 @@
+{
+  "name": "agent-harness",
+  "version": "0.1.0",
+  "description": "A provider-independent TypeScript runtime for reliable AI agents",
+  "license": "MIT",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "exports": {
+    ".": { "types": "./dist/src/index.d.ts", "import": "./dist/src/index.js" },
+    "./providers/openai": { "types": "./dist/src/providers/openai.d.ts", "import": "./dist/src/providers/openai.js" },
+    "./providers/anthropic": { "types": "./dist/src/providers/anthropic.d.ts", "import": "./dist/src/providers/anthropic.js" },
+    "./providers/ollama": { "types": "./dist/src/providers/ollama.d.ts", "import": "./dist/src/providers/ollama.js" },
+    "./mcp": { "types": "./dist/src/mcp/index.d.ts", "import": "./dist/src/mcp/index.js" },
+    "./tools/fs": { "types": "./dist/src/tools/fs/index.d.ts", "import": "./dist/src/tools/fs/index.js" },
+    "./tools/commands": { "types": "./dist/src/tools/commands/index.d.ts", "import": "./dist/src/tools/commands/index.js" }
+  },
+  "bin": { "agent-harness": "./dist/src/cli/index.js" },
+  "files": ["dist/src", "README.md", "LICENSE", "SECURITY.md", "CHANGELOG.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "node --test dist/test/**/*.test.js",
+    "check": "npm run typecheck && npm run build && npm test"
+  },
+  "dependencies": { "ajv": "^8.17.1", "ajv-formats": "^3.0.1" },
+  "devDependencies": {
+    "@types/node": "^22.15.30",
+    "typescript": "^5.8.3"
+  }
+}
